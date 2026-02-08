@@ -1,9 +1,12 @@
-import MovieCard from './MovieCard';
+import React from "react";
+import MovieCard from "./MovieCard";
 
-function MovieGrid({ movies }) {
+const MovieGrid = ({ movies }) => {
+  if (!movies || movies.length === 0) return <div>No movies found.</div>;
+
   return (
-    <div className="movie-grid">
-      {movies.map(movie => (
+    <div className="flex flex-wrap justify-center">
+      {movies.map((movie) => (
         <MovieCard key={movie.id} movie={movie} />
       ))}
     </div>

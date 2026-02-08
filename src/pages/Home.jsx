@@ -1,32 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { getPopularMovies } from "../services/movieService";
+import React from "react";
 import MovieGrid from "../components/MovieGrid";
+import LoadingSpinner from "../components/LoadingSpinner";
+import ErrorMessage from "../components/ErrorMessage";
 
-const Home = () => {
-  const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        setLoading(true);
-        const data = await getPopularMovies();
-        setMovies(data);
-      } catch (err) {
-        setError("Failed to load movies.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMovies();
-  }, []);
-
+const Home = ({ movies, loading, error }) => {
   if (loading) return <LoadingSpinner />;
   if (error) return <ErrorMessage message={error} />;
-
-
   return <MovieGrid movies={movies} />;
 };
 
