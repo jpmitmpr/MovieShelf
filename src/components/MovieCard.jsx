@@ -18,5 +18,21 @@ function MovieCard({ movie }) {
     </div>
   );
 };
+    <img
+  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+  alt={movie.title}
+  className="w-full h-auto rounded"
+/>
 
 export default MovieCard;
+
+const handleFavorite = () => {
+  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  if (favorites.find((m) => m.id === movie.id)) {
+    favorites = favorites.filter((m) => m.id !== movie.id);
+  } else {
+    favorites.push(movie);
+  }
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+  setIsFavorite(!isFavorite);
+};
